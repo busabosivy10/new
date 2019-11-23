@@ -2,12 +2,12 @@ import Firebase from 'firebase'
 import 'firebase/firestore'
 
 let config = {
-	apiKey: "AIzaSyBk8z_7YM8zN458Tp_oHKEhuAWJvtFVTKw",
-    authDomain: "psu-complaint.firebaseapp.com",
-    databaseURL: "https://psu-complaint.firebaseio.com",
-    projectId: "psu-complaint",
-    storageBucket: "psu-complaint.appspot.com",
-    messagingSenderId: "663383467818"
+	apiKey: "AIzaSyDvb2PvMyggJWMaYbtdUmInApfvCc0RlcE",
+    authDomain: "znt-05062016.firebaseapp.com",
+    databaseURL: "https://znt-05062016.firebaseio.com",
+    projectId: "znt-05062016",
+    storageBucket: "znt-05062016.appspot.com",
+    messagingSenderId: "331593362087"
 }
 
 let firebaseApp = Firebase.initializeApp(config)
