@@ -17,7 +17,12 @@
       }
     ]
   },
+<<<<<<< HEAD
   "database": {
     "rules": "database.rules.json"
+=======
+  "storage": {
+    "rules": "init.html"
+>>>>>>> 684da0b8dbf15ab1cfd24ffe22ffe6a1b68a6d09
   }
 }

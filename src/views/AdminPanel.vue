@@ -22,16 +22,17 @@
 			<div class="left-nav">
 				<ul>
 					<li><router-link to="/admin-panel/complaints"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> Complaints</router-link></li>
+					<li><router-link to="/admin-panel/add-account"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> AddAccount</router-link></li>
 					<li v-if="$store.state.decodedAdminToken.adminFor == 'All'"><router-link to="/admin-panel/users"><i class="fa fa-users" aria-hidden="true"></i> Users</router-link></li>
-					<li v-if="$store.state.decodedAdminToken.adminFor == 'All'"><router-link to="/admin-panel/add-account"><i class="fa fa-users" aria-hidden="true"></i> Create User Account</router-link></li>
 					<!-- <li><router-link to="/admin-panel/logs"><i class="fa fa-list" aria-hidden="true"></i> Logs</router-link></li> -->
 					<li><router-link to="/admin-panel/my-account"><i class="fa fa-user-circle" aria-hidden="true"></i> My Account</router-link></li>
 				</ul>
 			</div>
 			<div class="main-wrapper">
 				<complaints v-if="$route.params.target == 'complaints'"></complaints>
-				<users v-if="$route.params.target == 'users'"></users>
 				<add-account v-if="$route.params.target == 'add-account'"></add-account>
+				<food v-if="$route.params.target == 'food'"></food>
+				<users v-if="$route.params.target == 'users'"></users>
 				<my-account v-if="$route.params.target == 'my-account'"></my-account>
 			</div>
 		</div>
@@ -54,8 +55,9 @@
 
 <script>
 	import Complaints from '../components/adminpanel/Complaints'
-	import Users from '../components/adminpanel/Users'
 	import AddAccount from '../components/adminpanel/AddAccount'
+	import Food from '../components/adminpanel/Food'
+	import Users from '../components/adminpanel/Users'
 	import MyAccount from '../components/adminpanel/MyAccount'
 	import jwt from 'jsonwebtoken'
 	import Cookie from 'js-cookie'
@@ -70,7 +72,7 @@
 			}
 		},
 		components: {
-			Complaints, Users, AddAccount, MyAccount
+			Complaints, AddAccount, Food, Users, MyAccount
 		},
 		methods: {
 			login() {

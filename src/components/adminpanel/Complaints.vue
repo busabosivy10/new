@@ -1,36 +1,58 @@
 <template>
 	<div class="complaints-component">
+	<div class="form-group search-user">
+			<input type="text" name="search" id="search-query" placeholder="Search" @keyup="filter()">
+		</div>
 		<table id="complaints-table">
 			<thead>
 				<tr>
+					<th>Database ID</th>
 					<th>Status</th>
-					<th class="sortable" @click="sort(3)">Client Category <i class="fa fa-sort" aria-hidden="true"></i></th>
-					<th class="sortable" @click="sort(4)">About <i class="fa fa-sort" aria-hidden="true"></i></th>
-					<th class="sortable" @click="sort(5)">Target <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(1)">Submitted By <i class="fa fa-sort" aria-hidden="true">Unit</i></th>
+					<th class="sortable" @click="sort(2)">Unit <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(2)">Tower <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(2)">Month <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(2)">Days <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(2)">Year <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(3)">Time
+					 <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(5)">Hour <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th class="sortable" @click="sort(5)">Minutes <i class="fa fa-sort" aria-hidden="true"></i></th>
 					<th class="sortable" @click="sort(6)">Date Submitted <i class="fa fa-sort" aria-hidden="true"></i></th>
 					<th class="sortable" @click="sort(7)">Date Last Updated <i class="fa fa-sort" aria-hidden="true"></i></th>
 					<th class="sortable" @click="sort(8)">Message <i class="fa fa-sort" aria-hidden="true"></i></th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="complaints-item" v-for="c in complaints" v-if="c.target == $store.state.decodedAdminToken.adminFor || $store.state.decodedAdminToken.adminFor == 'All'">
+				<tr class="complaints-item" v-for="c in complaints" v-if="c.target == $store.state.decodedAdminToken.adminFor || $store.state.decodedAdminToken.adminFor == 'All' || c.department == $store.state.decodedAdminToken.dept || c.position == $store.state.decodedAdminToken.dept">
+				<td><a :href="'https://console.firebase.google.com/project/psuc-2d75e/database/firestore/data~2Fcomplaints~2F' + complaints['.key']" target="_blank">{{ complaints['.key'] }}</a></td>
 					<td>
-						<div class="form-group">
+						<div class="form-group status">
 							<select :value="c.status" @change="updateStatus($event, c['.key'])">
 								<option>Pending</option>
 								<option>Solved</option>
+								<option>Pending</option>
+								<option>Ongoing</option>
+								<option>Canceled</option>
 							</select>
 						</div>
 					</td>
-					<td>{{ c.way }}</td>
+					<td>{{ c.real_name }}</td>
+					<td>{{ c.unit }}</td>
+					<td>{{ c.tower }}</td>
 					<td>{{ c.about }}</td>
-					<td>{{ c.target }}
-						<span v-if="c.target == 'Instructor' && c.department && c.department != 'none'">({{ c.department }})</span>
-						<span v-if="c.target == 'Staff' && c.position && c.position != 'none'">({{ c.position }})</span>
-					</td>
+					<td>{{ c.target }}</td>
+					<td>{{ c.way }}</td>
+					<td>{{ c.time }}</td>
+					<td>{{ c.hours }}</td>
+					<td>{{ c.minutes }}</td>
 					<td>{{ c.created_at }}</td>
 					<td>{{ c.updated_at }}</td>
 					<td>{{ c.message | str_limit }} <button class="view-message" @click="viewMessage(c.message)"><i class="fa fa-eye" aria-hidden="true"></i> View</button></td>
+					<td>
+						<button @click="confirmDelete(c['.key'])"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -162,5 +184,5 @@
 		  if (cc > 0) {break;}
 		}
 	  }
-	}	
+	}
 </script>
