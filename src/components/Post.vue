@@ -3,40 +3,24 @@
 		<div class="post-template">
 			<div class="col left">
 				<div class="info-group">
-					<p class="label">Posted by:</p>
-					<p class="value">{{ data.real_name }}</p>
-				</div>
-				<div class="info-group">
-					<p class="label">Unit:</p>
-					<p class="value">{{ data.unit }}</p>
-				</div>
-				<div class="info-group">
-					<p class="label">Tower</p>
-					<p class="value">{{ data.tower }}</p>
-				</div>
-				<div class="info-group">
-					<p class="label">Month:</p>
-					<p class="value">{{ data.about }}</p>
-				</div>
-				<div class="info-group">
-					<p class="label">Day:</p>
-					<p class="value">{{ data.target }}</p>
-				</div>
-				<div class="info-group">
-					<p class="label">Year:</p>
+					<p class="label">Client Category</p>
 					<p class="value">{{ data.way }}</p>
 				</div>
 				<div class="info-group">
-					<p class="label">Time:</p>
-					<p class="value">{{ data.time }}</p>
+					<p class="label">Subject:</p>
+					<p class="value">{{ data.about }}</p>
 				</div>
 				<div class="info-group">
-					<p class="label">Hour:</p>
-					<p class="value">{{ data.hour }}</p>
+					<p class="label">About:</p>
+					<p class="value">{{ data.target }}</p>
 				</div>
-				<div class="info-group">
-					<p class="label">Minutes:</p>
-					<p class="value">{{ data.minutes }}</p>
+				<div class="info-group" v-if="data.department.length > 0 && data.department != 'none'">
+					<p class="label">Department:</p>
+					<p class="value">{{ data.department }}</p>
+				</div>
+				<div class="info-group" v-if="data.position.length > 0 && data.position != 'none'">
+					<p class="label">Office:</p>
+					<p class="value">{{ data.position }}</p>
 				</div>
 				<div class="info-group">
 					<p class="label">Date Submitted:</p>
@@ -99,8 +83,6 @@
 			return {
 				hideComments: true,
 				alias: '',
-				date: '',
-				time: '',
 				comment: '',
 				comments: [],
 				hasShown: false,
